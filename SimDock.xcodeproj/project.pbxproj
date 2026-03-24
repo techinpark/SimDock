@@ -1,0 +1,351 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		23F52BA22D27ADECF91B5291 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6BB88203FAA5D24D9AFFA1 /* MenuManager.swift */; };
+		3CBCABA7CA1BBFD951108C5B /* ShellExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37DB44E9C58626CA5725FFA /* ShellExecutor.swift */; };
+		57782A38A9857C098EFED91A /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04D3295D3C688991634CDC /* FileManagerService.swift */; };
+		5D4DF039E56CCA5E30082A38 /* SimulatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2CBEFFF0F155B209AE9ACE /* SimulatorService.swift */; };
+		96B81E841EEDE74D9FCF69CF /* SimDockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4891EB31F4C95BD8B06B9D9 /* SimDockApp.swift */; };
+		DE4B8C7280802A9061757CFD /* SimulatorDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8671BCE512AB4EDE3331C94 /* SimulatorDevice.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		14AEF1CF74DA009270F31335 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2E6BB88203FAA5D24D9AFFA1 /* MenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
+		79724723B99B128383DFA9D4 /* SimDock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimDock.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E2CBEFFF0F155B209AE9ACE /* SimulatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorService.swift; sourceTree = "<group>"; };
+		A37DB44E9C58626CA5725FFA /* ShellExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellExecutor.swift; sourceTree = "<group>"; };
+		A8671BCE512AB4EDE3331C94 /* SimulatorDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorDevice.swift; sourceTree = "<group>"; };
+		C4891EB31F4C95BD8B06B9D9 /* SimDockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimDockApp.swift; sourceTree = "<group>"; };
+		C7BC2C08FEE2EBE685E16B27 /* SimDock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimDock.entitlements; sourceTree = "<group>"; };
+		FC04D3295D3C688991634CDC /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0AD22046D98033DCF72FBA32 /* SimDock */ = {
+			isa = PBXGroup;
+			children = (
+				14AEF1CF74DA009270F31335 /* Info.plist */,
+				C7BC2C08FEE2EBE685E16B27 /* SimDock.entitlements */,
+				C4891EB31F4C95BD8B06B9D9 /* SimDockApp.swift */,
+				C525E36C3B1069DC77BE1E98 /* Menu */,
+				FEB445ACEECC0EB2EAD77F6E /* Models */,
+				89F567F859039C500FEF7819 /* Services */,
+				F5931F9FD1AA839874C3BD6A /* Utilities */,
+			);
+			path = SimDock;
+			sourceTree = "<group>";
+		};
+		1D8640AA4E8974A74ACBAFAA = {
+			isa = PBXGroup;
+			children = (
+				0AD22046D98033DCF72FBA32 /* SimDock */,
+				8A8A2D7E2A1FA6D7F597BF82 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		89F567F859039C500FEF7819 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FC04D3295D3C688991634CDC /* FileManagerService.swift */,
+				8E2CBEFFF0F155B209AE9ACE /* SimulatorService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		8A8A2D7E2A1FA6D7F597BF82 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				79724723B99B128383DFA9D4 /* SimDock.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C525E36C3B1069DC77BE1E98 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				2E6BB88203FAA5D24D9AFFA1 /* MenuManager.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		F5931F9FD1AA839874C3BD6A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A37DB44E9C58626CA5725FFA /* ShellExecutor.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		FEB445ACEECC0EB2EAD77F6E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A8671BCE512AB4EDE3331C94 /* SimulatorDevice.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B171341DF1D0445EB41D6D7D /* SimDock */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75777AF8DAF238085C88A25E /* Build configuration list for PBXNativeTarget "SimDock" */;
+			buildPhases = (
+				4081E46132377DE586E9296F /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimDock;
+			packageProductDependencies = (
+			);
+			productName = SimDock;
+			productReference = 79724723B99B128383DFA9D4 /* SimDock.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8F228489673A30F6B6D36B1D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					B171341DF1D0445EB41D6D7D = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 9AB9DB749245AA7AEB8A2646 /* Build configuration list for PBXProject "SimDock" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 1D8640AA4E8974A74ACBAFAA;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 8A8A2D7E2A1FA6D7F597BF82 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B171341DF1D0445EB41D6D7D /* SimDock */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4081E46132377DE586E9296F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57782A38A9857C098EFED91A /* FileManagerService.swift in Sources */,
+				23F52BA22D27ADECF91B5291 /* MenuManager.swift in Sources */,
+				3CBCABA7CA1BBFD951108C5B /* ShellExecutor.swift in Sources */,
+				96B81E841EEDE74D9FCF69CF /* SimDockApp.swift in Sources */,
+				DE4B8C7280802A9061757CFD /* SimulatorDevice.swift in Sources */,
+				5D4DF039E56CCA5E30082A38 /* SimulatorService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3EECD0373D810C0061366697 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SimDock/SimDock.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SimDock/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.fernando.SimDock;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		CA129AB52D58D030DA65CEC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SimDock/SimDock.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SimDock/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.fernando.SimDock;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		F1CBB41C77AD7A78B42367B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		FF050EF06E06126BC275F76A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		75777AF8DAF238085C88A25E /* Build configuration list for PBXNativeTarget "SimDock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA129AB52D58D030DA65CEC0 /* Debug */,
+				3EECD0373D810C0061366697 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9AB9DB749245AA7AEB8A2646 /* Build configuration list for PBXProject "SimDock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF050EF06E06126BC275F76A /* Debug */,
+				F1CBB41C77AD7A78B42367B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8F228489673A30F6B6D36B1D /* Project object */;
+}

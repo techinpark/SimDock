@@ -1,0 +1,25 @@
+name: SimDock
+options:
+  bundleIdPrefix: kr.fernando
+  deploymentTarget:
+    macOS: "13.0"
+  xcodeVersion: "16.0"
+  createIntermediateGroups: true
+
+targets:
+  SimDock:
+    type: application
+    platform: macOS
+    sources:
+      - SimDock
+    settings:
+      base:
+        INFOPLIST_FILE: SimDock/Info.plist
+        CODE_SIGN_ENTITLEMENTS: SimDock/SimDock.entitlements
+        PRODUCT_BUNDLE_IDENTIFIER: kr.fernando.SimDock
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "5.9"
+        MACOSX_DEPLOYMENT_TARGET: "13.0"
+        CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: false
