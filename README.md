@@ -7,15 +7,19 @@
   <img src="https://img.shields.io/github/v/release/techinpark/SimDock" alt="Release">
 </p>
 
-**SimDock**은 macOS 메뉴바에서 iOS 시뮬레이터를 빠르게 실행하고 관리할 수 있는 경량 유틸리티 앱입니다.
+<p align="center">
+  <a href="README_ko.md">한국어</a>
+</p>
+
+A lightweight macOS menu bar utility that lets you quickly launch and manage iOS simulators.
 
 ## Features
 
-- **메뉴바에서 바로 실행** — 시뮬레이터 목록을 확인하고 클릭 한 번으로 부팅
-- **런타임별 그룹핑** — iOS 26, iOS 18 등 런타임별로 정리된 목록
-- **상태 표시** — 실행 중(🟢), 종료(⚫) 상태를 직관적으로 표시
-- **데이터 디렉토리 탐색** — 마우스 오버 시 시뮬레이터 내부 폴더를 바로 확인
-- **Finder 연동** — 서브메뉴에서 클릭하면 해당 폴더를 Finder에서 열기
+- **Launch from Menu Bar** — Browse your simulators and boot them with a single click
+- **Grouped by Runtime** — Simulators organized by runtime (iOS 26, iOS 18, etc.)
+- **Status Indicator** — Visual status for each simulator (Running / Shutdown)
+- **Browse Data Directory** — Hover over a simulator to explore its internal folders
+- **Open in Finder** — Click any folder in the submenu to reveal it in Finder
 
 ## Installation
 
@@ -27,11 +31,11 @@ brew install --cask simdock
 
 ### GitHub Releases
 
-[Releases](https://github.com/techinpark/SimDock/releases) 페이지에서 최신 `.dmg` 파일을 다운로드하여 설치할 수 있습니다.
+Download the latest `.dmg` from the [Releases](https://github.com/techinpark/SimDock/releases) page.
 
-1. `SimDock.dmg` 다운로드
-2. DMG 파일 열기
-3. `SimDock.app`을 `/Applications` 폴더로 드래그
+1. Download `SimDock.dmg`
+2. Open the DMG file
+3. Drag `SimDock.app` to `/Applications`
 
 ### Mac App Store
 
@@ -43,7 +47,7 @@ brew install --cask simdock
 
 ## Requirements
 
-- macOS 13.0 (Ventura) 이상
+- macOS 13.0 (Ventura) or later
 - Xcode Command Line Tools (`xcode-select --install`)
 
 ## Build from Source
@@ -55,7 +59,7 @@ xcodegen generate
 xcodebuild -scheme SimDock -configuration Release build
 ```
 
-또는 Xcode에서 직접 열어 빌드할 수 있습니다.
+Or open the project directly in Xcode:
 
 ```bash
 open SimDock.xcodeproj
@@ -63,7 +67,7 @@ open SimDock.xcodeproj
 
 ## Contributing
 
-기여는 언제나 환영합니다! 버그 리포트, 기능 제안, PR 모두 감사합니다.
+Contributions are welcome! Feel free to open issues for bug reports, feature requests, or submit pull requests.
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
