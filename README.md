@@ -18,14 +18,18 @@ A lightweight macOS menu bar utility that lets you quickly launch and manage iOS
 - **Launch from Menu Bar** — Browse your simulators and boot them with a single click
 - **Grouped by Runtime** — Simulators organized by runtime (iOS 26, iOS 18, etc.)
 - **Status Indicator** — Visual status for each simulator (Running / Shutdown)
+- **Installed Apps** — View installed apps per simulator with app icons
+- **UserDefaults Browser** — Hover over an app to browse its UserDefaults plist files
 - **Browse Data Directory** — Hover over a simulator to explore its internal folders
 - **Open in Finder** — Click any folder in the submenu to reveal it in Finder
+- **Launch at Login** — Auto-start SimDock when you log in
 
 ## Installation
 
 ### Homebrew (Recommended)
 
 ```bash
+brew tap techinpark/tap
 brew install --cask simdock
 ```
 
@@ -36,14 +40,6 @@ Download the latest `.dmg` from the [Releases](https://github.com/techinpark/Sim
 1. Download `SimDock.dmg`
 2. Open the DMG file
 3. Drag `SimDock.app` to `/Applications`
-
-### Mac App Store
-
-<a href="#">
-  <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-mac-app-store.svg" alt="Download on the Mac App Store" height="40">
-</a>
-
-> Coming Soon
 
 ## Requirements
 

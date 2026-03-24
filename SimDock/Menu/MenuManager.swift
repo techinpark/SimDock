@@ -1,15 +1,11 @@
 import AppKit
-import ServiceManagement
+import LaunchAtLogin
 
 final class MenuManager: NSObject, NSMenuDelegate {
 
     let menu = NSMenu()
     private let simulatorService = SimulatorService()
     private var cachedRuntimes: [SimulatorRuntime] = []
-
-    private var isLaunchAtLoginEnabled: Bool {
-        SMAppService.mainApp.status == .enabled
-    }
 
     override init() {
         super.init()
@@ -78,7 +74,7 @@ final class MenuManager: NSObject, NSMenuDelegate {
             keyEquivalent: ""
         )
         launchAtLoginItem.target = self
-        launchAtLoginItem.state = isLaunchAtLoginEnabled ? .on : .off
+        launchAtLoginItem.state = LaunchAtLogin.isEnabled ? .on : .off
         menu.addItem(launchAtLoginItem)
 
         let githubItem = NSMenuItem(title: "GitHub - Open Source", action: #selector(openGitHub), keyEquivalent: "")
@@ -230,15 +226,7 @@ final class MenuManager: NSObject, NSMenuDelegate {
     }
 
     @objc private func toggleLaunchAtLogin(_ sender: NSMenuItem) {
-        do {
-            if isLaunchAtLoginEnabled {
-                try SMAppService.mainApp.unregister()
-            } else {
-                try SMAppService.mainApp.register()
-            }
-        } catch {
-            NSLog("Failed to toggle launch at login: \(error)")
-        }
+        LaunchAtLogin.isEnabled.toggle()
     }
 
     @objc private func openGitHub() {

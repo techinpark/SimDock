@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		23F52BA22D27ADECF91B5291 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6BB88203FAA5D24D9AFFA1 /* MenuManager.swift */; };
 		3CBCABA7CA1BBFD951108C5B /* ShellExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37DB44E9C58626CA5725FFA /* ShellExecutor.swift */; };
+		3D64DC88CD2D79A153F34833 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 8EA6604C0052F8F674E8A785 /* LaunchAtLogin */; };
+		44D26DA7B90CE18ADE41C8B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAD2E5E6C17ADC909441D10D /* Assets.xcassets */; };
 		57782A38A9857C098EFED91A /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04D3295D3C688991634CDC /* FileManagerService.swift */; };
 		5D4DF039E56CCA5E30082A38 /* SimulatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2CBEFFF0F155B209AE9ACE /* SimulatorService.swift */; };
 		96B81E841EEDE74D9FCF69CF /* SimDockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4891EB31F4C95BD8B06B9D9 /* SimDockApp.swift */; };
@@ -24,13 +26,26 @@
 		A8671BCE512AB4EDE3331C94 /* SimulatorDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorDevice.swift; sourceTree = "<group>"; };
 		C4891EB31F4C95BD8B06B9D9 /* SimDockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimDockApp.swift; sourceTree = "<group>"; };
 		C7BC2C08FEE2EBE685E16B27 /* SimDock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimDock.entitlements; sourceTree = "<group>"; };
+		EAD2E5E6C17ADC909441D10D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC04D3295D3C688991634CDC /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F5C7D759D5C33248916375C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D64DC88CD2D79A153F34833 /* LaunchAtLogin in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		0AD22046D98033DCF72FBA32 /* SimDock */ = {
 			isa = PBXGroup;
 			children = (
+				EAD2E5E6C17ADC909441D10D /* Assets.xcassets */,
 				14AEF1CF74DA009270F31335 /* Info.plist */,
 				C7BC2C08FEE2EBE685E16B27 /* SimDock.entitlements */,
 				C4891EB31F4C95BD8B06B9D9 /* SimDockApp.swift */,
@@ -99,6 +114,8 @@
 			buildConfigurationList = 75777AF8DAF238085C88A25E /* Build configuration list for PBXNativeTarget "SimDock" */;
 			buildPhases = (
 				4081E46132377DE586E9296F /* Sources */,
+				5FADB4998734DEC290625209 /* Resources */,
+				F5C7D759D5C33248916375C2 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -106,6 +123,7 @@
 			);
 			name = SimDock;
 			packageProductDependencies = (
+				8EA6604C0052F8F674E8A785 /* LaunchAtLogin */,
 			);
 			productName = SimDock;
 			productReference = 79724723B99B128383DFA9D4 /* SimDock.app */;
@@ -121,6 +139,7 @@
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					B171341DF1D0445EB41D6D7D = {
+						DevelopmentTeam = U6GQL8JQMT;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -134,6 +153,9 @@
 			);
 			mainGroup = 1D8640AA4E8974A74ACBAFAA;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				665CD5C84D4DD88598ED1A9E /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8A8A2D7E2A1FA6D7F597BF82 /* Products */;
 			projectDirPath = "";
@@ -143,6 +165,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5FADB4998734DEC290625209 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44D26DA7B90CE18ADE41C8B1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4081E46132377DE586E9296F /* Sources */ = {
@@ -169,15 +202,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = NO;
+				DEVELOPMENT_TEAM = U6GQL8JQMT;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SimDock/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_LSUIElement = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.fernando.SimDock;
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tmsae.SimDock;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.9;
 			};
@@ -191,15 +227,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = NO;
+				DEVELOPMENT_TEAM = U6GQL8JQMT;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SimDock/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_LSUIElement = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.fernando.SimDock;
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tmsae.SimDock;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.9;
 			};
@@ -346,6 +385,25 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		665CD5C84D4DD88598ED1A9E /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8EA6604C0052F8F674E8A785 /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 665CD5C84D4DD88598ED1A9E /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */;
+			productName = LaunchAtLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8F228489673A30F6B6D36B1D /* Project object */;
 }

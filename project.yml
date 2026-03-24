@@ -6,20 +6,29 @@ options:
   xcodeVersion: "16.0"
   createIntermediateGroups: true
 
+packages:
+  LaunchAtLogin:
+    url: https://github.com/sindresorhus/LaunchAtLogin-Modern
+    from: "1.1.0"
+
 targets:
   SimDock:
     type: application
     platform: macOS
     sources:
       - SimDock
+    dependencies:
+      - package: LaunchAtLogin
     settings:
       base:
-        INFOPLIST_FILE: SimDock/Info.plist
         CODE_SIGN_ENTITLEMENTS: SimDock/SimDock.entitlements
-        PRODUCT_BUNDLE_IDENTIFIER: kr.fernando.SimDock
-        MARKETING_VERSION: "1.0.0"
+        PRODUCT_BUNDLE_IDENTIFIER: com.tmsae.SimDock
+        MARKETING_VERSION: "1.1.0"
         CURRENT_PROJECT_VERSION: "1"
         SWIFT_VERSION: "5.9"
         MACOSX_DEPLOYMENT_TARGET: "13.0"
         CODE_SIGN_STYLE: Automatic
-        GENERATE_INFOPLIST_FILE: false
+        DEVELOPMENT_TEAM: U6GQL8JQMT
+        GENERATE_INFOPLIST_FILE: true
+        INFOPLIST_KEY_LSUIElement: true
+        INFOPLIST_KEY_LSApplicationCategoryType: "public.app-category.developer-tools"

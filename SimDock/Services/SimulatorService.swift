@@ -19,20 +19,16 @@ final class SimulatorService {
     }
 
     func bootDevice(_ udid: String) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            try? ShellExecutor.runFireAndForget(arguments: ["simctl", "boot", udid])
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                try? ShellExecutor.runFireAndForget(
-                    executable: "/usr/bin/open",
-                    arguments: ["-a", "Simulator"]
-                )
-            }
+        ShellExecutor.runFireAndForget(arguments: ["simctl", "boot", udid])
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            ShellExecutor.runFireAndForget(
+                executable: "/usr/bin/open",
+                arguments: ["-a", "Simulator"]
+            )
         }
     }
 
     func shutdownDevice(_ udid: String) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            try? ShellExecutor.runFireAndForget(arguments: ["simctl", "shutdown", udid])
-        }
+        ShellExecutor.runFireAndForget(arguments: ["simctl", "shutdown", udid])
     }
 }

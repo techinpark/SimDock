@@ -1,0 +1,118 @@
+default_platform :mac
+
+platform :mac do
+
+  def api_key
+    app_store_connect_api_key(
+      key_id: ENV['CONNECT_KEY_ID'],
+      issuer_id: ENV['CONNECT_ISSUER_ID'],
+      key_filepath: File.expand_path("AuthKey_H6MBBXAXH9.p8", __dir__)
+    )
+  end
+
+  desc "Sync certificates and profiles via match"
+  lane :certificates do
+    match(
+      type: "appstore",
+      platform: "macos",
+      app_identifier: ENV['APPLE_APP_IDENTIFIER'],
+      api_key: api_key,
+      readonly: false
+    )
+  end
+
+  desc "Register App ID and create app on App Store Connect"
+  lane :create_app do
+    require 'spaceship'
+    token = Spaceship::ConnectAPI::Token.create(
+      key_id: ENV['CONNECT_KEY_ID'],
+      issuer_id: ENV['CONNECT_ISSUER_ID'],
+      filepath: File.expand_path("AuthKey_H6MBBXAXH9.p8", __dir__)
+    )
+    Spaceship::ConnectAPI.token = token
+
+    # Step 1: Register Bundle ID
+    bundle_id = Spaceship::ConnectAPI::BundleId.find(ENV['APPLE_APP_IDENTIFIER'])
+    if bundle_id
+      UI.success("Bundle ID '#{bundle_id.identifier}' already exists!")
+    else
+      UI.message("Creating Bundle ID...")
+      bundle_id = Spaceship::ConnectAPI::BundleId.create(
+        name: "SimDock",
+        identifier: ENV['APPLE_APP_IDENTIFIER'],
+        platform: Spaceship::ConnectAPI::BundleIdPlatform::MAC_OS
+      )
+      UI.success("Bundle ID created: #{bundle_id.identifier}")
+    end
+
+    # Step 2: Create App on App Store Connect
+    app = Spaceship::ConnectAPI::App.find(ENV['APPLE_APP_IDENTIFIER'])
+    if app
+      UI.success("App '#{app.name}' already exists on App Store Connect!")
+    else
+      UI.message("Creating App on App Store Connect...")
+      app = Spaceship::ConnectAPI::App.create(
+        name: "SimDock",
+        version_string: "1.0.0",
+        sku: "com.tmsae.SimDock",
+        bundle_id: bundle_id.id,
+        platforms: [Spaceship::ConnectAPI::Platform::MAC_OS],
+        primary_locale: "en-US"
+      )
+      UI.success("App created on App Store Connect: #{app.name}")
+    end
+  end
+
+  desc "Build, archive and upload to App Store Connect"
+  lane :release do
+    certificates
+
+    build_mac_app(
+      scheme: "SimDock",
+      export_method: "app-store",
+      export_options: {
+        provisioningProfiles: {
+          ENV['APPLE_APP_IDENTIFIER'] => "match AppStore com.tmsae.SimDock macos"
+        }
+      }
+    )
+
+    upload_to_app_store(
+      api_key: api_key,
+      app_identifier: ENV['APPLE_APP_IDENTIFIER'],
+      platform: "osx",
+      skip_metadata: true,
+      skip_screenshots: true,
+      force: true
+    )
+  end
+
+  desc "Set App Store metadata"
+  lane :set_metadata do
+    deliver(
+      api_key: api_key,
+      app_identifier: ENV['APPLE_APP_IDENTIFIER'],
+      platform: "osx",
+      skip_binary_upload: true,
+      skip_screenshots: true,
+      force: true,
+      submission_information: { add_id_info_uses_idfa: false },
+      name: { "en-US" => "SimDock - Simulator Launcher", "ko" => "SimDock - 시뮬레이터 런처" },
+      subtitle: { "en-US" => "Launch & Manage Simulators", "ko" => "시뮬레이터 빠른 실행 및 관리" },
+      description: {
+        "en-US" => "SimDock is a lightweight macOS menu bar utility that lets you quickly launch and manage iOS simulators.\n\nFeatures:\n• Launch simulators from the menu bar with a single click\n• Simulators grouped by runtime (iOS 26, iOS 18, etc.)\n• Visual status indicators — see which simulators are running\n• Browse installed apps per simulator with app icons\n• Access UserDefaults plist files directly from the menu\n• Explore simulator data directories with hover submenus\n• Open any folder in Finder instantly\n• Launch at Login support\n\nSimDock is open source and built for developers who work with iOS simulators daily. No more switching to Terminal or Xcode just to boot a simulator.\n\nRequires Xcode Command Line Tools.",
+        "ko" => "SimDock은 macOS 메뉴바에서 iOS 시뮬레이터를 빠르게 실행하고 관리할 수 있는 경량 유틸리티 앱입니다.\n\n주요 기능:\n• 메뉴바에서 클릭 한 번으로 시뮬레이터 실행\n• 런타임별 그룹핑 (iOS 26, iOS 18 등)\n• 실행 중/종료 상태를 직관적인 컬러 인디케이터로 표시\n• 시뮬레이터별 설치된 앱 목록 확인 (앱 아이콘 포함)\n• UserDefaults plist 파일에 메뉴에서 바로 접근\n• 마우스 오버로 시뮬레이터 데이터 디렉토리 탐색\n• 폴더를 Finder에서 바로 열기\n• 로그인 시 자동 실행 지원\n\nSimDock은 오픈소스이며, 매일 iOS 시뮬레이터를 사용하는 개발자를 위해 만들어졌습니다. 시뮬레이터를 실행하기 위해 터미널이나 Xcode를 열 필요가 없습니다.\n\nXcode Command Line Tools가 필요합니다."
+      },
+      keywords: {
+        "en-US" => "simulator,iOS,developer,xcode,menu bar,launch,manage,swift,tools,utility",
+        "ko" => "시뮬레이터,iOS,개발자,xcode,메뉴바,실행,관리,swift,도구,유틸리티"
+      },
+      privacy_url: { "en-US" => "https://github.com/techinpark/SimDock", "ko" => "https://github.com/techinpark/SimDock" },
+      support_url: { "en-US" => "https://github.com/techinpark/SimDock/issues", "ko" => "https://github.com/techinpark/SimDock/issues" },
+      marketing_url: { "en-US" => "https://github.com/techinpark/SimDock", "ko" => "https://github.com/techinpark/SimDock" },
+      primary_category: "DEVELOPER_TOOLS",
+      secondary_category: "UTILITIES"
+    )
+  end
+
+end
