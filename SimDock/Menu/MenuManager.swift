@@ -1,10 +1,15 @@
 import AppKit
+import ServiceManagement
 
 final class MenuManager: NSObject, NSMenuDelegate {
 
     let menu = NSMenu()
     private let simulatorService = SimulatorService()
     private var cachedRuntimes: [SimulatorRuntime] = []
+
+    private var isLaunchAtLoginEnabled: Bool {
+        SMAppService.mainApp.status == .enabled
+    }
 
     override init() {
         super.init()
@@ -67,6 +72,15 @@ final class MenuManager: NSObject, NSMenuDelegate {
 
         menu.addItem(.separator())
 
+        let launchAtLoginItem = NSMenuItem(
+            title: "Launch at Login",
+            action: #selector(toggleLaunchAtLogin(_:)),
+            keyEquivalent: ""
+        )
+        launchAtLoginItem.target = self
+        launchAtLoginItem.state = isLaunchAtLoginEnabled ? .on : .off
+        menu.addItem(launchAtLoginItem)
+
         let githubItem = NSMenuItem(title: "GitHub - Open Source", action: #selector(openGitHub), keyEquivalent: "")
         githubItem.target = self
         githubItem.image = NSImage(systemSymbolName: "star.fill", accessibilityDescription: nil)
@@ -85,29 +99,105 @@ final class MenuManager: NSObject, NSMenuDelegate {
         let submenu = NSMenu(title: device.name)
         submenu.autoenablesItems = false
 
-        // Open in Finder
+        // Installed Apps section
+        let apps = FileManagerService.installedApps(dataPath: device.dataPath)
+        if !apps.isEmpty {
+            let appsHeader = NSMenuItem(title: "Installed Apps", action: nil, keyEquivalent: "")
+            appsHeader.isEnabled = false
+            appsHeader.attributedTitle = NSAttributedString(
+                string: "Installed Apps",
+                attributes: [
+                    .font: NSFont.boldSystemFont(ofSize: NSFont.smallSystemFontSize),
+                    .foregroundColor: NSColor.secondaryLabelColor
+                ]
+            )
+            submenu.addItem(appsHeader)
+
+            let defaultAppIcon = NSImage(systemSymbolName: "app.fill", accessibilityDescription: nil)
+
+            for app in apps {
+                let appItem = NSMenuItem(title: app.displayName, action: #selector(revealInFinder(_:)), keyEquivalent: "")
+                appItem.target = self
+                appItem.image = app.icon ?? defaultAppIcon
+                appItem.representedObject = app.appURL
+                appItem.toolTip = app.bundleIdentifier
+
+                // Add UserDefaults submenu if preferences exist
+                if !app.preferenceFiles.isEmpty {
+                    let appSubmenu = NSMenu(title: app.displayName)
+                    appSubmenu.autoenablesItems = false
+
+                    let openAppItem = NSMenuItem(title: "Reveal App Bundle", action: #selector(revealInFinder(_:)), keyEquivalent: "")
+                    openAppItem.target = self
+                    openAppItem.representedObject = app.appURL
+                    openAppItem.image = NSImage(systemSymbolName: "folder", accessibilityDescription: nil)
+                    appSubmenu.addItem(openAppItem)
+
+                    appSubmenu.addItem(.separator())
+
+                    let prefsHeader = NSMenuItem(title: "UserDefaults", action: nil, keyEquivalent: "")
+                    prefsHeader.isEnabled = false
+                    prefsHeader.attributedTitle = NSAttributedString(
+                        string: "UserDefaults",
+                        attributes: [
+                            .font: NSFont.boldSystemFont(ofSize: NSFont.smallSystemFontSize),
+                            .foregroundColor: NSColor.secondaryLabelColor
+                        ]
+                    )
+                    appSubmenu.addItem(prefsHeader)
+
+                    if let prefsURL = app.preferencesURL {
+                        let openPrefsItem = NSMenuItem(title: "Open Preferences Folder", action: #selector(openFileItem(_:)), keyEquivalent: "")
+                        openPrefsItem.target = self
+                        openPrefsItem.representedObject = prefsURL
+                        openPrefsItem.image = NSImage(systemSymbolName: "folder.badge.gearshape", accessibilityDescription: nil)
+                        appSubmenu.addItem(openPrefsItem)
+                    }
+
+                    for file in app.preferenceFiles {
+                        let fileName = file.lastPathComponent
+                        let fileItem = NSMenuItem(title: fileName, action: #selector(openFileItem(_:)), keyEquivalent: "")
+                        fileItem.target = self
+                        fileItem.representedObject = file
+                        fileItem.image = NSImage(systemSymbolName: "doc.text", accessibilityDescription: nil)
+                        appSubmenu.addItem(fileItem)
+                    }
+
+                    appItem.submenu = appSubmenu
+                }
+
+                submenu.addItem(appItem)
+            }
+
+            submenu.addItem(.separator())
+        }
+
+        // Data Directory section
+        let dataHeader = NSMenuItem(title: "Data Directory", action: nil, keyEquivalent: "")
+        dataHeader.isEnabled = false
+        dataHeader.attributedTitle = NSAttributedString(
+            string: "Data Directory",
+            attributes: [
+                .font: NSFont.boldSystemFont(ofSize: NSFont.smallSystemFontSize),
+                .foregroundColor: NSColor.secondaryLabelColor
+            ]
+        )
+        submenu.addItem(dataHeader)
+
         let openItem = NSMenuItem(title: "Open in Finder", action: #selector(openInFinder(_:)), keyEquivalent: "")
         openItem.target = self
         openItem.representedObject = device.dataPath
         openItem.image = NSImage(systemSymbolName: "folder.badge.gearshape", accessibilityDescription: nil)
         submenu.addItem(openItem)
-        submenu.addItem(.separator())
 
         let items = FileManagerService.contentsOfDataDirectory(dataPath: device.dataPath)
-
-        if items.isEmpty {
-            let emptyItem = NSMenuItem(title: "No data", action: nil, keyEquivalent: "")
-            emptyItem.isEnabled = false
-            submenu.addItem(emptyItem)
-        } else {
-            for fileItem in items {
-                let symbolName = fileItem.isDirectory ? "folder.fill" : "doc"
-                let menuItem = NSMenuItem(title: fileItem.name, action: #selector(openFileItem(_:)), keyEquivalent: "")
-                menuItem.target = self
-                menuItem.image = NSImage(systemSymbolName: symbolName, accessibilityDescription: nil)
-                menuItem.representedObject = fileItem.url
-                submenu.addItem(menuItem)
-            }
+        for fileItem in items {
+            let symbolName = fileItem.isDirectory ? "folder.fill" : "doc"
+            let menuItem = NSMenuItem(title: fileItem.name, action: #selector(openFileItem(_:)), keyEquivalent: "")
+            menuItem.target = self
+            menuItem.image = NSImage(systemSymbolName: symbolName, accessibilityDescription: nil)
+            menuItem.representedObject = fileItem.url
+            submenu.addItem(menuItem)
         }
 
         return submenu
@@ -132,6 +222,23 @@ final class MenuManager: NSObject, NSMenuDelegate {
     @objc private func openFileItem(_ sender: NSMenuItem) {
         guard let url = sender.representedObject as? URL else { return }
         NSWorkspace.shared.open(url)
+    }
+
+    @objc private func revealInFinder(_ sender: NSMenuItem) {
+        guard let url = sender.representedObject as? URL else { return }
+        NSWorkspace.shared.activateFileViewerSelecting([url])
+    }
+
+    @objc private func toggleLaunchAtLogin(_ sender: NSMenuItem) {
+        do {
+            if isLaunchAtLoginEnabled {
+                try SMAppService.mainApp.unregister()
+            } else {
+                try SMAppService.mainApp.register()
+            }
+        } catch {
+            NSLog("Failed to toggle launch at login: \(error)")
+        }
     }
 
     @objc private func openGitHub() {
