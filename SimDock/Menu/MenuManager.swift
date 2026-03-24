@@ -67,6 +67,13 @@ final class MenuManager: NSObject, NSMenuDelegate {
 
         menu.addItem(.separator())
 
+        let githubItem = NSMenuItem(title: "GitHub - Open Source", action: #selector(openGitHub), keyEquivalent: "")
+        githubItem.target = self
+        githubItem.image = NSImage(systemSymbolName: "star.fill", accessibilityDescription: nil)
+        menu.addItem(githubItem)
+
+        menu.addItem(.separator())
+
         let quitItem = NSMenuItem(title: "Quit SimDock", action: #selector(quitClicked), keyEquivalent: "q")
         quitItem.target = self
         menu.addItem(quitItem)
@@ -125,6 +132,10 @@ final class MenuManager: NSObject, NSMenuDelegate {
     @objc private func openFileItem(_ sender: NSMenuItem) {
         guard let url = sender.representedObject as? URL else { return }
         NSWorkspace.shared.open(url)
+    }
+
+    @objc private func openGitHub() {
+        NSWorkspace.shared.open(URL(string: "https://github.com/techinpark/SimDock")!)
     }
 
     @objc private func refreshClicked() {
